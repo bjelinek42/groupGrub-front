@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import LogIn from "../views/LogIn.vue";
 import LogOut from "../views/LogOut.vue";
 import RestaurantsIndex from "../views/RestaurantsIndex.vue";
+import RestaurantNew from "../views/RestaurantNew.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/restaurants',
     name: 'restaurants',
     component: RestaurantsIndex
+  },
+  {
+    path: '/restaurants/new',
+    name: 'restaurantnew',
+    component: RestaurantNew
   },
   {
     path: '/about',
