@@ -5,6 +5,7 @@ import LogIn from "../views/LogIn.vue";
 import LogOut from "../views/LogOut.vue";
 import RestaurantsIndex from "../views/RestaurantsIndex.vue";
 import RestaurantNew from "../views/RestaurantNew.vue";
+import UserProfile from "../views/UserProfile.vue";
 
 const routes = [
   {
@@ -26,6 +27,11 @@ const routes = [
     path: '/logout',
     name: 'logout',
     component: LogOut
+  },
+  {
+    path: '/users/1',
+    name: 'profile',
+    component: UserProfile
   },
   {
     path: '/restaurants',
