@@ -5,7 +5,8 @@ export default {
     return {
       message: "Your Profile",
       restaurants: [],
-      user: {}
+      user: {},
+      group: {}
     };
   },
   created: function () {
@@ -17,6 +18,7 @@ export default {
         console.log('showing profile', response.data)
         this.restaurants = response.data.restaurants
         this.user = response.data.user
+        this.group = response.data.group
         console.log(this.restaurants)
         console.log(this.user.name)
       })
@@ -29,7 +31,7 @@ export default {
   <div class="home">
     <h1>{{ message }}</h1>
     <h2>Username: {{ this.user.name }}</h2>
-    <h2> Group: {{ this.user.group_id }}</h2>
+    <h2> Group: {{ this.group.name }}</h2>
     <div v-for="restaurant in restaurants" v-bind:key="restaurant">
       <p>{{ restaurant.name }}</p>
       <p>{{ restaurant.cuisines }}</p>

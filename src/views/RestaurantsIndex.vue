@@ -26,6 +26,7 @@ export default {
     <h1>{{ message }}</h1>
     <div v-for="restaurant in restaurants" v-bind:key="restaurant.id">
       <p>{{ restaurant.name }}</p>
+      <p>{{ restaurant.address }}</p>
       <p><img v-bind:src="restaurant.image"></p>
     </div>
   </div>
