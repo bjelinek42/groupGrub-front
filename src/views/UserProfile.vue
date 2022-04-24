@@ -25,6 +25,9 @@ export default {
     },
     groupPage: function () {
       this.$router.push(`/groups/${this.group.id}`)
+    },
+    addRestaurant: function () {
+      this.$router.push(`/restaurants`)
     }
   },
 };
@@ -34,7 +37,8 @@ export default {
   <div class="home">
     <h1>{{ message }}</h1>
     <h2>Username: {{ this.user.name }}</h2>
-    <h2> Group: {{ this.group.name }} <button @click="groupPage()">View Group Page</button></h2>
+    <h2>Group: {{ this.group.name }} <button @click="groupPage()">View Group Page</button></h2>
+    <button @click="addRestaurant()">Add Restaurant to Favorites</button>
     <div v-for="restaurant in restaurants" v-bind:key="restaurant">
       <p>{{ restaurant.name }}</p>
       <p>{{ restaurant.cuisines }}</p>
