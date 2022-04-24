@@ -7,7 +7,7 @@
     <router-link to="/logout">Logout</router-link> |
     <router-link to="/restaurants">View Restaurants</router-link> |
     <router-link to="/restaurants/new">New Restaurant</router-link> |
-    <router-link to="/users/1">View Profile</router-link>
+    <router-link to="/users">View Profile</router-link>
   </nav>
   <router-view />
 </template>

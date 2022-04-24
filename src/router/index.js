@@ -30,12 +30,12 @@ const routes = [
     component: LogOut
   },
   {
-    path: '/users/1',
+    path: '/users',
     name: 'profile',
     component: UserProfile
   },
   {
-    path: '/groups/1',
+    path: '/groups/:id',
     name: 'groups',
     component: GroupShow
   },

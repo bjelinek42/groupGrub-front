@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     showProfile: function () {
-      axios.get(`/users/1`).then(response => {
+      axios.get(`/users/:id`).then(response => {
         console.log('showing profile', response.data)
         this.restaurants = response.data.restaurants
         this.user = response.data.user
@@ -22,6 +22,9 @@ export default {
         console.log(this.restaurants)
         console.log(this.user.name)
       })
+    },
+    groupPage: function () {
+      this.$router.push(`/groups/${this.group.id}`)
     }
   },
 };
@@ -31,7 +34,7 @@ export default {
   <div class="home">
     <h1>{{ message }}</h1>
     <h2>Username: {{ this.user.name }}</h2>
-    <h2> Group: {{ this.group.name }}</h2>
+    <h2> Group: {{ this.group.name }} <button @click="groupPage()">View Group Page</button></h2>
     <div v-for="restaurant in restaurants" v-bind:key="restaurant">
       <p>{{ restaurant.name }}</p>
       <p>{{ restaurant.cuisines }}</p>
