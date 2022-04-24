@@ -6,6 +6,7 @@ import LogOut from "../views/LogOut.vue";
 import RestaurantsIndex from "../views/RestaurantsIndex.vue";
 import RestaurantNew from "../views/RestaurantNew.vue";
 import UserProfile from "../views/UserProfile.vue";
+import GroupShow from "../views/GroupShow.vue";
 
 const routes = [
   {
@@ -32,6 +33,11 @@ const routes = [
     path: '/users/1',
     name: 'profile',
     component: UserProfile
+  },
+  {
+    path: '/groups/1',
+    name: 'groups',
+    component: GroupShow
   },
   {
     path: '/restaurants',
