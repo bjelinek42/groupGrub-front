@@ -4,7 +4,9 @@ export default {
   data: function () {
     return {
       message: "Your Group",
-      winner: {}
+      winner: {},
+      group: {},
+      users: {}
     };
   },
   created: function () {
@@ -14,7 +16,9 @@ export default {
     showGroup: function () {
       axios.get(`/groups/1`).then(response => {
         console.log('showing group', response.data)
-        this.winner = response.data
+        this.winner = response.data.winning_restaurant
+        this.group = response.data.group
+        this.users = response.data.users
       })
     }
   },
@@ -24,7 +28,12 @@ export default {
 <template>
   <div class="home">
     <h1>{{ message }}</h1>
-    <h2>Group Details Here</h2>
+    <h2>Group Details</h2>
+    <h3>Group Name: {{ group.name }}</h3>
+    <h3>Members: </h3>
+    <div v-for="user in users" v-bind:key="user">
+      <h3>{{ user.name }}</h3>
+    </div>
     <h2>Restaurant Pick</h2>
     <p>{{ winner.name }}</p>
     <p>{{ winner.address }}</p>
