@@ -7,6 +7,7 @@ import RestaurantsIndex from "../views/RestaurantsIndex.vue";
 import RestaurantNew from "../views/RestaurantNew.vue";
 import UserProfile from "../views/UserProfile.vue";
 import GroupShow from "../views/GroupShow.vue";
+import RestaurantsSearch from "../views/RestaurantsSearch.vue";
 
 const routes = [
   {
@@ -38,6 +39,11 @@ const routes = [
     path: '/groups/:id',
     name: 'groups',
     component: GroupShow
+  },
+  {
+    path: '/restaurants/search',
+    name: 'restaurants search',
+    component: RestaurantsSearch
   },
   {
     path: '/restaurants',

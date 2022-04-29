@@ -19,7 +19,7 @@ export default {
         this.userRestaurants = response.data.user_restaurants
         console.log(this.userRestaurants)
       })
-    },
+    }
   },
 };
 </script>
