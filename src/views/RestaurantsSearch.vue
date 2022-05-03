@@ -15,14 +15,14 @@ export default {
     getApi: function () {
       axios.get("/restaurants/search").then((response) => {
         this.restaurants = response.data;
-        console.log("in get api", response.data, this.cuisines);
+        console.log("in get api", response.data);
       });
     },
     createRestaurant: function (restaurant) {
-      this.newRestaurantParams.location_id = restaurant.location_id.toString()
+      this.newRestaurantParams.location_id = restaurant.location_id
       this.newRestaurantParams.name = restaurant.name
       this.newRestaurantParams.address = restaurant.address
-      this.newRestaurantParams.cuisine = restaurant.cuisine
+      // this.newRestaurantParams.cuisines = restaurant.cuisine
       axios.post(`/restaurants`, this.newRestaurantParams).then(response => {
         console.log('in create', response.data)
       })
