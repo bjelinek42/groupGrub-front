@@ -4,8 +4,8 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      store: [],
-      cuisines: {}
+      restaurants: [],
+      newRestaurantParams: {}
     };
   },
   created: function () {
@@ -14,11 +14,23 @@ export default {
   methods: {
     getApi: function () {
       axios.get("/restaurants/search").then((response) => {
-        this.store = response.data;
-        this.cuisines = this.store.cuisine;
+        this.restaurants = response.data;
         console.log("in get api", response.data, this.cuisines);
       });
     },
+    createRestaurant: function (restaurant) {
+      this.newRestaurantParams.location_id = restaurant.location_id.toString()
+      this.newRestaurantParams.name = restaurant.name
+      this.newRestaurantParams.address = restaurant.address
+      this.newRestaurantParams.cuisine = restaurant.cuisine
+      axios.post(`/restaurants`, this.newRestaurantParams).then(response => {
+        console.log('in create', response.data)
+      })
+        .catch((error) => {
+          console.log("restaurant create error", error.response);
+          this.errors = error.response.data.errors;
+        })
+    }
   },
 };
 </script>
@@ -26,9 +38,9 @@ export default {
 <template>
   <div>
     <button v-on:click="getApi()">GET API</button>
-    <div v-for="restaurant in store" v-bind:key="restaurant.location_id">
+    <div v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
       <h1>Location Id: {{ restaurant.location_id }}</h1>
-      <h1>Name: {{ restaurant.name }}</h1>
+      <h1>Name: {{ restaurant.name }} </h1>
       <h1>Type: {{ restaurant.category.name }}, {{ restaurant.subcategory[0].name }}</h1>
       <h1>Address: {{ restaurant.address }}</h1>
       <h1>Rating: {{ restaurant.rating }}/5 <a v-bind:href="restaurant.web_url" target="_blank">Reviews</a></h1>
@@ -49,6 +61,7 @@ export default {
       <h2>Reserve a Table:<a v-bind:href="restaurant.reserve_info.url" target="_blank"><img
             v-bind:src="restaurant.reserve_info.provider_img" v-bind:alt="None" style="width:300px"></a>
       </h2>
+      <button @click="createRestaurant(restaurant)">Add To Favorites</button>
     </div>
   </div>
 </template>
