@@ -105,8 +105,70 @@ export default {
 </script>
 
 <template>
-  <div>
-    <button v-on:click="getApi()">GET API</button>
+  <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
+      <div class="card h-100">
+        <img v-bind:src="restaurant.photo.images.large.url" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h2 class="card-title">Location Id: {{ restaurant.location_id }} | {{ restaurant.name }}</h2>
+          <p class="card-text">{{ restaurant.address }}</p>
+          <p class="card-text">Price: {{ restaurant.price_level }} | Rating: {{ restaurant.rating }}/5 <a
+              v-bind:href="restaurant.web_url" target="_blank">Reviews</a></p>
+          <div class="container">
+            <div class="row align-items-start">
+              <div class="col">
+                <u>Cuisines</u>
+                <div v-for="cuisine in restaurant.cuisine" v-bind:key="cuisine.key">
+                  {{ cuisine.name }}
+                </div>
+              </div>
+              <div class="col" v-if="restaurant.hours">
+                Sunday:
+                <div v-for="time in restaurant.hours.week_ranges[0]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Monday:
+                <div v-for="time in restaurant.hours.week_ranges[1]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Tuesday:
+                <div v-for="time in restaurant.hours.week_ranges[2]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Wednesday:
+                <div v-for="time in restaurant.hours.week_ranges[3]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Thursday:
+                <div v-for="time in restaurant.hours.week_ranges[4]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Friday:
+                <div v-for="time in restaurant.hours.week_ranges[5]" v-bind:key="time">
+                  {{ time }}
+                </div>
+                Saturday:
+                <div v-for="time in restaurant.hours.week_ranges[6]" v-bind:key="time">
+                  {{ time }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <h4>Reserve a Table or Order Ahead:
+            <p>{{ restaurant.phone }}</p>
+            <a v-if="restaurant.reserve_info" v-bind:href="restaurant.reserve_info.url" target="_blank"> <img
+                v-bind:src="restaurant.reserve_info.provider_img" alt="Click Here" style="width:300px"></a>
+          </h4>
+          <button class="btn btn-success" @click="createRestaurant(restaurant)"> Add To Favorites</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div>
+    <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button>
     <div v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
       <h1>Location Id: {{ restaurant.location_id }}</h1>
       <h1>Name: {{ restaurant.name }} </h1>
@@ -142,14 +204,14 @@ export default {
       <div v-for="cuisine in restaurant.cuisine" v-bind:key="cuisine.key">
         <h2>{{ cuisine.name }}</h2>
       </div>
-      <!-- <h1>Dietary Restrictions: {{ restaurant.dietary_restrictions }}</h1> -->
+      <h1>Dietary Restrictions: {{ restaurant.dietary_restrictions }}</h1>
       <h2 v-if="restaurant.reserve_info">Reserve a Table or Order Ahead:<a v-bind:href="restaurant.reserve_info.url"
           target="_blank"><img v-bind:src="restaurant.reserve_info.provider_img" alt="Click Here"
             style="width:300px"></a>
       </h2>
       <button @click="createRestaurant(restaurant)">Add To Favorites</button>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <style>
