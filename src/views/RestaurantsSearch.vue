@@ -6,7 +6,8 @@ export default {
     return {
       restaurants: [],
       newRestaurantParams: {},
-      weeklyHoursDone: []
+      weeklyHoursDone: [],
+      searchTerm: ""
     };
   },
   watch: {
@@ -20,7 +21,7 @@ export default {
     }
   },
   created: function () {
-    // this.getApi();
+    this.getApi();
   },
   methods: {
     getApi: function () {
@@ -42,6 +43,15 @@ export default {
           console.log("restaurant create error", error.response);
           this.errors = error.response.data.errors;
         })
+    },
+    searchRestaurants: function () {
+      return this.restaurants.filter(restaurant => {
+        console.log(restaurant.name)
+        var lowerName = restaurant.name.toLowerCase();
+        console.log(lowerName)
+        var lowerSearchTerm = this.searchTerm.toLowerCase()
+        return lowerName.includes(lowerSearchTerm)
+      })
     },
     convertHours: function (restaurant) {
       console.log(restaurant)
@@ -105,9 +115,10 @@ export default {
 </script>
 
 <template>
-  <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button>
+  <!-- <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button> -->
+  <p>Search by Name: <input type="text" v-model="searchTerm"> </p>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
+    <div class="col" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
       <div class="card h-100">
         <img v-bind:src="restaurant.photo.images.large.url" class="card-img-top" alt="...">
         <div class="card-body">
