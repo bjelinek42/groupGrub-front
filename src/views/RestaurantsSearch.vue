@@ -11,7 +11,8 @@ export default {
       searchTerm: "",
       currentCity: {},
       cities: [],
-      chosenCity: {}
+      chosenCity: {},
+      cuisines: ""
     };
   },
   watch: {
@@ -40,7 +41,12 @@ export default {
       this.newRestaurantParams.location_id = restaurant.location_id
       this.newRestaurantParams.name = restaurant.name
       this.newRestaurantParams.address = restaurant.address
-      // this.newRestaurantParams.cuisines = restaurant.cuisine
+      this.newRestaurantParams.image = restaurant.photo.images.large.url
+      restaurant.cuisine.forEach(cuisine => {
+        this.cuisines = this.cuisines + cuisine.name + ', '
+      })
+      this.cuisines = this.cuisines.slice(0, -2)
+      this.newRestaurantParams.cuisines = this.cuisines
       axios.post(`/restaurants`, this.newRestaurantParams).then(response => {
         console.log('in create', response.data)
       })
