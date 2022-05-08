@@ -86,7 +86,7 @@ export default {
             } else if (openHours === 12) {
               openPM = "pm";
             } else {
-              if (openHours === 24) {
+              if (openHours === 24 || openHours === 0) {
                 openHours = 12;
               }
               openPM = "am";
@@ -136,7 +136,7 @@ export default {
   <p v-for="city in cities" v-bind:key="city.location_id">
     {{ city.city }} <input type="button" value="Select" @click="getApi(city)">
   </p>
-  <p>Search by Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
+  <p>Search Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
       <div class="card h-100">
