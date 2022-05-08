@@ -1,5 +1,6 @@
 <script>
 import axios from "axios";
+// import { Console } from "console";
 
 export default {
   data: function () {
@@ -7,7 +8,10 @@ export default {
       restaurants: [],
       newRestaurantParams: {},
       weeklyHoursDone: [],
-      searchTerm: ""
+      searchTerm: "",
+      currentCity: {},
+      cities: [],
+      chosenCity: {}
     };
   },
   watch: {
@@ -21,11 +25,12 @@ export default {
     }
   },
   created: function () {
-    this.getApi();
+    // this.getApi();
   },
   methods: {
-    getApi: function () {
-      axios.get("/restaurants/search").then((response) => {
+    getApi: function (city) {
+      console.log("city", city)
+      axios.get(`/restaurants/search?chosenCity=${city.location_id}`).then((response) => {
         this.restaurants = response.data;
         console.log("in get api", response.data);
 
@@ -43,6 +48,15 @@ export default {
           console.log("restaurant create error", error.response);
           this.errors = error.response.data.errors;
         })
+    },
+    findCity: function () {
+      console.log(this.currentCity)
+      axios.post("/restaurants/search", this.currentCity).then(response => {
+        console.log(response.data)
+        this.cities = response.data
+        console.log(this.cities)
+      })
+
     },
     searchRestaurants: function () {
       return this.restaurants.filter(restaurant => {
@@ -116,7 +130,13 @@ export default {
 
 <template>
   <!-- <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button> -->
-  <p>Search by Name: <input type="text" v-model="searchTerm"> </p>
+  <p>Enter city you would like to seach: <input type="text" v-model="currentCity.currentCity"><button
+      @click="findCity()">Search Cities</button> </p>
+  <p>Please select your city from the following:</p>
+  <p v-for="city in cities" v-bind:key="city.location_id">
+    {{ city.city }} <input type="button" value="Select" @click="getApi(city)">
+  </p>
+  <p>Search by Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
       <div class="card h-100">
