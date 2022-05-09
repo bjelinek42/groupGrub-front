@@ -8,6 +8,7 @@ import RestaurantNew from "../views/RestaurantNew.vue";
 import UserProfile from "../views/UserProfile.vue";
 import GroupShow from "../views/GroupShow.vue";
 import RestaurantsSearch from "../views/RestaurantsSearch.vue";
+import VoteView from "../views/VoteView.vue";
 
 const routes = [
   {
@@ -54,6 +55,11 @@ const routes = [
     path: '/restaurants/new',
     name: 'restaurantnew',
     component: RestaurantNew
+  },
+  {
+    path: '/vote_restaurants',
+    name: 'VoteView',
+    component: VoteView
   },
   {
     path: '/about',
