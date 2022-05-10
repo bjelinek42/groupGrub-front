@@ -20,6 +20,12 @@ export default {
         this.group = response.data.group
         this.users = response.data.users
       })
+    },
+    generateVote: function () {
+      axios.post("/vote_restaurants").then(response => {
+        console.log("generating vote", response.data)
+        this.$router.push("/vote_restaurants")
+      })
     }
   },
 };
@@ -34,6 +40,7 @@ export default {
     <div v-for="user in users" v-bind:key="user">
       <h3>{{ user.name }}</h3>
     </div>
+    <button @click="generateVote()">Start New Vote</button>
     <h2>Restaurant Pick</h2>
     <p>{{ winner.name }}</p>
     <p>{{ winner.address }}</p>

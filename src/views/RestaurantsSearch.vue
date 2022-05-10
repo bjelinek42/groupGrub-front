@@ -146,7 +146,7 @@ export default {
   <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
       <div class="card h-100">
-        <img v-bind:src="restaurant.photo.images.large.url" class="card-img-top" alt="...">
+        <img v-bind:src="restaurant.photo.images.small.url" class="card-img-top" alt="...">
         <div class="card-body">
           <h2 class="card-title">Location Id: {{ restaurant.location_id }} | {{ restaurant.name }}</h2>
           <p class="card-text">{{ restaurant.address }}</p>
