@@ -49,6 +49,7 @@ export default {
       this.newRestaurantParams.cuisines = this.cuisines
       axios.post(`/restaurants`, this.newRestaurantParams).then(response => {
         console.log('in create', response.data)
+        this.$router.push("/users")
       })
         .catch((error) => {
           console.log("restaurant create error", error.response);

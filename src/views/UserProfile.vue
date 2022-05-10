@@ -27,7 +27,7 @@ export default {
       this.$router.push(`/groups/${this.group.id}`)
     },
     addRestaurant: function () {
-      this.$router.push(`/restaurants`)
+      this.$router.push("/restaurants/search")
     }
   },
 };
