@@ -6,7 +6,8 @@ export default {
       message: "Your Profile",
       restaurants: [],
       user: {},
-      group: {}
+      group: {},
+      deleteSuccessful: ""
     };
   },
   created: function () {
@@ -19,8 +20,6 @@ export default {
         this.restaurants = response.data.restaurants
         this.user = response.data.user
         this.group = response.data.group
-        console.log(this.restaurants)
-        console.log(this.user.name)
       })
     },
     groupPage: function () {
@@ -28,6 +27,14 @@ export default {
     },
     addRestaurant: function () {
       this.$router.push("/restaurants/search")
+    },
+    deleteRestaurant: function (restaurant) {
+      console.log(this.restaurantUserParams)
+      axios.delete(`/restaurant_users?user_id=${this.user.id}&restaurant_id=${restaurant.id}`).then(response => {
+        console.log(response.data)
+        this.deleteSuccessful = response.data.message
+      })
+      window.location.reload()
     }
   },
 };
@@ -38,6 +45,7 @@ export default {
     <h1>{{ message }}</h1>
     <h2>Username: {{ this.user.name }}</h2>
     <h2>Group: {{ this.group.name }} <button @click="groupPage()">View Group Page</button></h2>
+    <h3 color="red">{{ this.deleteSuccessful }}</h3>
     <button @click="addRestaurant()">Add Restaurant to Favorites</button>
     <div class="card-group">
       <div class="card" v-for="restaurant in restaurants" v-bind:key="restaurant">
@@ -48,16 +56,10 @@ export default {
           <p class="card-text">{{ restaurant.cuisines }}</p>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+          <button @click="deleteRestaurant(restaurant)">Delete from Favorites</button>
         </div>
       </div>
     </div>
-    <!-- <div v-for="restaurant in restaurants" v-bind:key="restaurant">
-      <p>{{ restaurant.name }}</p>
-      <p>{{ restaurant.cuisines }}</p>
-      <p>{{ restaurant.address }}</p>
-      <p><img v-bind:src="restaurant.image"></p>
-    </div> -->
   </div>
 </template>
 
