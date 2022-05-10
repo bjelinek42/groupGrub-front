@@ -35,6 +35,9 @@ export default {
         this.deleteSuccessful = response.data.message
       })
       window.location.reload()
+    },
+    goToCurrentVote: function () {
+      this.$router.push("/vote_restaurants")
     }
   },
 };
@@ -45,6 +48,7 @@ export default {
     <h1>{{ message }}</h1>
     <h2>Username: {{ this.user.name }}</h2>
     <h2>Group: {{ this.group.name }} <button @click="groupPage()">View Group Page</button></h2>
+    <button @click="goToCurrentVote()">Go to current vote</button>
     <h3 color="red">{{ this.deleteSuccessful }}</h3>
     <button @click="addRestaurant()">Add Restaurant to Favorites</button>
     <div class="card-group">

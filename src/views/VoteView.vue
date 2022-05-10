@@ -5,11 +5,12 @@ export default {
     return {
       message: "Welcome to Vue.jsx!",
       voteRestaurants: [],
-      restaurants: []
+      restaurants: [],
+      voteMessage: ""
     };
   },
   created: function () {
-    this.getVote
+    this.getVote()
   },
   methods: {
     getVote: function () {
@@ -21,7 +22,7 @@ export default {
     declareVote: function (restaurant) {
       console.log(restaurant)
       axios.patch(`/vote_restaurants/${restaurant.id}`).then(response => {
-        console.log(response.data)
+        this.voteMessage = response.data.message
       })
     }
   },
@@ -34,9 +35,9 @@ export default {
     <div v-for="restaurant in voteRestaurants" v-bind:key="restaurant.id">
       {{ restaurant.restaurant.name }}
       {{ restaurant.restaurant.address }}
-      <button @click="declareVote(restaurant)">Vote</button>
+      <p><button @click="declareVote(restaurant)">Vote</button></p>
     </div>
-    <button @click="getVote()">Click</button>
+    <p>{{ this.voteMessage }}</p>
   </div>
 </template>
 

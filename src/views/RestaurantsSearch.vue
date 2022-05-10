@@ -41,7 +41,7 @@ export default {
       this.newRestaurantParams.location_id = restaurant.location_id
       this.newRestaurantParams.name = restaurant.name
       this.newRestaurantParams.address = restaurant.address
-      this.newRestaurantParams.image = restaurant.photo.images.large.url
+      this.newRestaurantParams.image = restaurant.photo.images.small.url
       restaurant.cuisine.forEach(cuisine => {
         this.cuisines = this.cuisines + cuisine.name + ', '
       })
