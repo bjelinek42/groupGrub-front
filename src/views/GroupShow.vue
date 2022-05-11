@@ -48,12 +48,12 @@ export default {
     <div v-if="this.allVotes === true">Most recent vote has concluded</div>
     <div v-else>Voting currently in progress</div>
     <div v-if="this.winner.name">
-      <h2>Previous Winner</h2>
+      <h2>Current Winner</h2>
       <p>{{ winner.name }}</p>
       <p>{{ winner.address }}</p>
       <p><img v-bind:src='winner.image'></p>
     </div>
-    <h2 v-else>No V otes Recorded</h2>
+    <h2 v-else>No Previous Votes Recorded</h2>
     <button @click="generateVote()">Start New Vote</button>
   </div>
 </template>

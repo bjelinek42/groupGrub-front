@@ -1,18 +1,48 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/signup">Signup</router-link> |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/logout">Logout</router-link> |
-    <router-link to="/restaurants">View Restaurants</router-link> |
-    <router-link to="/restaurants/new">New Restaurant</router-link> |
-    <router-link to="/users">View Profile</router-link>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" Fantasy href="/">groupGrub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/users">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/groups/:id">Group</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/restaurants/search">Search Restaurants</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Authentication
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/login">Login</a></li>
+              <li><a class="dropdown-item" href="/Logout">Logout</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="/signup">SignUp</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
   </nav>
   <router-view />
 </template>
 
 <style>
+body {
+  background-image: url('./assets/restaurant.png')
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
