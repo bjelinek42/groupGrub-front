@@ -51,6 +51,7 @@ export default {
     <button @click="goToCurrentVote()">Go to current vote</button>
     <h3 color="red">{{ this.deleteSuccessful }}</h3>
     <button @click="addRestaurant()">Add Restaurant to Favorites</button>
+    <h2>My Favorite Restaurants</h2>
     <div class="row row-cols-1 row-cols-md-5 g-4">
       <div class="col mx-auto" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
         <div class="card h-100">

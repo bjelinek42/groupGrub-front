@@ -12,7 +12,9 @@ export default {
       currentCity: {},
       cities: [],
       chosenCity: {},
-      cuisines: ""
+      cuisines: "",
+      selectCities: "",
+      searchByName: false
     };
   },
   watch: {
@@ -21,9 +23,13 @@ export default {
         if (restaurant.hours) {
           restaurant.hours.week_ranges = this.convertHours(restaurant)
           console.log(restaurant.hours.week_ranges)
+          this.searchByName = true
         }
       })
-    }
+    },
+    cities() {
+      this.selectCities = "Please select your city from the following:"
+    },
   },
   created: function () {
     // this.getApi();
@@ -136,15 +142,14 @@ export default {
 </script>
 
 <template>
-  <!-- <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button> -->
   <div>
     <p>Enter city you would like to seach: <input type="text" v-model="currentCity.currentCity"><button
         @click="findCity()">Search Cities</button> </p>
-    <p>Please select your city from the following:</p>
+    <p>{{ selectCities }}</p>
     <p v-for="city in cities" v-bind:key="city.location_id">
       {{ city.city }} <input type="button" value="Select" @click="getApi(city)">
     </p>
-    <p>Search Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
+    <p v-if="searchByName === true">Search Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
     <div class="row row-cols-1 row-cols-md-4 g-4">
       <div class="col mx-auto" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
         <div class="card h-100">

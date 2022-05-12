@@ -31,6 +31,9 @@ export default {
         console.log("generating vote", response.data)
         this.$router.push("/vote_restaurants")
       })
+    },
+    goToVotePage: function () {
+      this.$router.push("/vote_restaurants")
     }
   },
 };
@@ -45,10 +48,13 @@ export default {
         <li class="list-group-item" v-for="user in users" v-bind:key="user">{{ user.name }}</li>
       </ul>
     </object>
-    <h3 v-if="this.allVotes === true">Most recent vote has concluded<p><button @click="generateVote()">Start New
+    <h3 v-if="this.allVotes === true">Most recent vote has concluded<p><button type="button" class="btn btn-warning"
+          @click="generateVote()">Start New
           Vote</button></p>
     </h3>
-    <div v-else>Voting currently in progress</div>
+    <div v-else>Voting currently in progress
+      <p><button type="button" class="btn btn-warning" @click="goToVotePage()">Go To Vote</button></p>
+    </div>
     <h2>Current Winner</h2>
     <div v-if="this.winner.name">
       <div class="row row-cols-1 row-cols-md-3">
