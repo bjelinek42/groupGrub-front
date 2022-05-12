@@ -48,11 +48,6 @@ export default {
         </div>
       </div>
     </div>
-    <div v-for="restaurant in voteRestaurants" v-bind:key="restaurant.id">
-      {{ restaurant.restaurant.name }}
-      {{ restaurant.restaurant.address }}
-      <p><button @click="declareVote(restaurant)">Vote</button></p>
-    </div>
     <p>{{ this.voteMessage }}</p>
   </div>
 </template>

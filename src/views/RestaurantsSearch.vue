@@ -136,6 +136,9 @@ export default {
       console.log(weeklyHours);
       this.weeklyHoursDone = weeklyHours
       return weeklyHours
+    },
+    seeMap: function (restaurant) {
+      window.open(`https://maps.google.com/?q=${restaurant.address}`)
     }
   },
 };
@@ -157,6 +160,7 @@ export default {
           <div class="card-body">
             <h2 class="card-title">Location Id: {{ restaurant.location_id }} | {{ restaurant.name }}</h2>
             <p class="card-text">{{ restaurant.address }}</p>
+            <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
             <p class="card-text">Price: {{ restaurant.price_level }} | Rating: {{ restaurant.rating }}/5 <a
                 v-bind:href="restaurant.web_url" target="_blank">Reviews</a></p>
             <div class="container">
