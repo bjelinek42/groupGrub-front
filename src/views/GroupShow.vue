@@ -38,25 +38,40 @@ export default {
 
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
-    <h2>Group Details</h2>
-    <h3>Group Name: {{ group.name }}</h3>
-    <h3>Members: </h3>
-    <div v-for="user in users" v-bind:key="user">
-      <h3>{{ user.name }}</h3>
-    </div>
-    <div v-if="this.allVotes === true">Most recent vote has concluded</div>
+    <h1>Your Group</h1>
+    <object width="20">
+      <ul class="list-group">
+        <li class="list-group-item"><b>{{ group.name }} Group Members</b></li>
+        <li class="list-group-item" v-for="user in users" v-bind:key="user">{{ user.name }}</li>
+      </ul>
+    </object>
+    <h3 v-if="this.allVotes === true">Most recent vote has concluded<p><button @click="generateVote()">Start New
+          Vote</button></p>
+    </h3>
     <div v-else>Voting currently in progress</div>
+    <h2>Current Winner</h2>
     <div v-if="this.winner.name">
-      <h2>Current Winner</h2>
-      <p>{{ winner.name }}</p>
-      <p>{{ winner.address }}</p>
-      <p><img v-bind:src='winner.image'></p>
+      <div class="row row-cols-1 row-cols-md-3">
+        <div class="col mx-auto">
+          <div class="card">
+            <img v-bind:src='winner.image' class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ winner.name }}</h5>
+              <p class="card-text">{{ winner.address }}</p>
+              <p class="card-text">{{ winner.cuisines }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <h2 v-else>No Previous Votes Recorded</h2>
-    <button @click="generateVote()">Start New Vote</button>
+
   </div>
 </template>
 
 <style>
+.list-group {
+  width: 300px;
+  margin: auto;
+}
 </style>

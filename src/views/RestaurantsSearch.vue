@@ -146,7 +146,7 @@ export default {
     </p>
     <p>Search Restaurants by Name: <input type="text" v-model="searchTerm"> </p>
     <div class="row row-cols-1 row-cols-md-4 g-4">
-      <div class="col" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
+      <div class="col mx-auto" v-for="restaurant in searchRestaurants()" v-bind:key="restaurant.location_id">
         <div class="card h-100">
           <img v-bind:src="restaurant.photo.images.small.url" class="card-img-top" alt="...">
           <div class="card-body">

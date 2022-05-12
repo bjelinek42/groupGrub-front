@@ -52,7 +52,7 @@ export default {
     <h3 color="red">{{ this.deleteSuccessful }}</h3>
     <button @click="addRestaurant()">Add Restaurant to Favorites</button>
     <div class="row row-cols-1 row-cols-md-5 g-4">
-      <div class="col" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
+      <div class="col mx-auto" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
         <div class="card h-100">
           <img class="card-img-top" v-if="restaurant.image"><img v-bind:src="restaurant.image">
           <div class="card-body">

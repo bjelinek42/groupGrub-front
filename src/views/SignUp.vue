@@ -6,7 +6,11 @@ export default {
     return {
       newUserParams: {},
       errors: [],
+      groups: []
     };
+  },
+  created: function () {
+    this.getGroups()
   },
   methods: {
     submit: function () {
@@ -20,6 +24,12 @@ export default {
           this.errors = error.response.data.errors;
         });
     },
+    getGroups: function () {
+      axios.get("/groups").then(response => {
+        console.log(response.data)
+        this.groups = response.data
+      })
+    }
   },
 };
 </script>
@@ -47,18 +57,10 @@ export default {
         <label>Password confirmation:</label>
         <input type="password" v-model="newUserParams.password_confirmation" />
       </div>
-      <input type="submit" value="Submit" />
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-          data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
+      <select name="groups" id="groups" v-model="newUserParams.group_id">
+        <option v-for="group in groups" v-bind:key="group.id" v-bind:value="group.id">{{ group.name }}</option>
+      </select>
+      <p><input type="submit" value="Submit" /></p>
     </form>
   </div>
 </template>
