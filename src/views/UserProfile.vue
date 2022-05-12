@@ -51,16 +51,18 @@ export default {
     <button @click="goToCurrentVote()">Go to current vote</button>
     <h3 color="red">{{ this.deleteSuccessful }}</h3>
     <button @click="addRestaurant()">Add Restaurant to Favorites</button>
-    <div class="card-group">
-      <div class="card" v-for="restaurant in restaurants" v-bind:key="restaurant">
-        <div v-if="restaurant.image"><img v-bind:src="restaurant.image"></div>
-        <div class="card-body">
-          <h5 class="card-title">{{ restaurant.name }}</h5>
-          <p class="card-text">{{ restaurant.address }}</p>
-          <p class="card-text">{{ restaurant.cuisines }}</p>
-        </div>
-        <div class="card-footer">
-          <button @click="deleteRestaurant(restaurant)">Delete from Favorites</button>
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+      <div class="col" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
+        <div class="card h-100">
+          <img class="card-img-top" v-if="restaurant.image"><img v-bind:src="restaurant.image">
+          <div class="card-body">
+            <h5 class="card-title">{{ restaurant.name }}</h5>
+            <p class="card-text">{{ restaurant.address }}</p>
+            <p class="card-text">{{ restaurant.cuisines }}</p>
+          </div>
+          <div class="card-footer">
+            <button @click="deleteRestaurant(restaurant)">Delete from Favorites</button>
+          </div>
         </div>
       </div>
     </div>
