@@ -66,3 +66,9 @@ export default {
     </form>
   </div>
 </template>
+
+<style>
+.signup {
+  margin: 15px;
+}
+</style>

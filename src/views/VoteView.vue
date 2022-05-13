@@ -68,4 +68,7 @@ export default {
 </template>
 
 <style>
+.home {
+  margin: 20px;
+}
 </style>

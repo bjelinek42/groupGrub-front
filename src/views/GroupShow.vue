@@ -84,4 +84,8 @@ export default {
   width: 300px;
   margin: auto;
 }
+
+.home {
+  margin: 20px;
+}
 </style>

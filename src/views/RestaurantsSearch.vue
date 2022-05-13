@@ -147,7 +147,7 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="margin">
     <p>Enter city you would like to seach: <input type="text" v-model="currentCity.currentCity"><button
         @click="findCity()">Search Cities</button> </p>
     <p>{{ selectCities }}</p>
@@ -221,4 +221,7 @@ export default {
 </template>
 
 <style>
+.margin {
+  margin: 20px;
+}
 </style>

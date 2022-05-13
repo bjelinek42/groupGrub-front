@@ -31,7 +31,7 @@ export default {
 <template>
   <div class="login">
     <form v-on:submit.prevent="submit()">
-      <h1>Login</h1>
+      <h1 class="margin">Login</h1>
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
@@ -47,3 +47,9 @@ export default {
     </form>
   </div>
 </template>
+
+<style>
+.margin {
+  margin: 15px;
+}
+</style>
