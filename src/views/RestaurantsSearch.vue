@@ -21,7 +21,6 @@ export default {
       this.restaurants.forEach(restaurant => {
         if (restaurant.hours) {
           restaurant.hours.week_ranges = this.convertHours(restaurant)
-          console.log(restaurant.hours.week_ranges)
           this.searchByName = true
         }
       })
@@ -31,14 +30,13 @@ export default {
     },
   },
   created: function () {
-    // this.getApi();
   },
   methods: {
     getApi: function (city) {
       console.log("city", city)
       axios.get(`/restaurants/search?chosenCity=${city.location_id}`).then((response) => {
         this.restaurants = response.data;
-        console.log("in get api", response.data);
+        console.log("retrieving restaurants");
 
       });
     },
@@ -54,7 +52,6 @@ export default {
       this.newRestaurantParams.cuisines = this.cuisines
       axios.post(`/restaurants.json`, this.newRestaurantParams).then(response => {
         console.log('in create', response.data.message)
-        // this.$router.push("/users")
       })
         .catch((error) => {
           console.log("restaurant create error", error.response);
@@ -66,23 +63,18 @@ export default {
       axios.post("/restaurants/search", this.currentCity).then(response => {
         console.log(response.data)
         this.cities = response.data
-        console.log(this.cities)
       })
 
     },
     searchRestaurants: function () {
       return this.restaurants.filter(restaurant => {
-        console.log(restaurant.name)
         var lowerName = restaurant.name.toLowerCase();
-        console.log(lowerName)
         var lowerSearchTerm = this.searchTerm.toLowerCase()
         return lowerName.includes(lowerSearchTerm)
       })
     },
     convertHours: function (restaurant) {
-      console.log(restaurant)
       var schedule = restaurant.hours.week_ranges
-      console.log(schedule)
       var weeklyHours = [];
       schedule.forEach(hours => {
         var dailyHours = [];
@@ -135,7 +127,7 @@ export default {
         }
         weeklyHours.push(dailyHours);
       });
-      console.log(weeklyHours);
+      // console.log(weeklyHours);
       this.weeklyHoursDone = weeklyHours
       return weeklyHours
     },
@@ -160,7 +152,7 @@ export default {
         <div class="card h-100">
           <img v-bind:src="restaurant.photo.images.small.url" class="card-img-top" alt="...">
           <div class="card-body">
-            <h2 class="card-title">Location Id: {{ restaurant.location_id }} | {{ restaurant.name }}</h2>
+            <h2 class="card-title">{{ restaurant.name }}</h2>
             <p class="card-text">{{ restaurant.address }}</p>
             <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
             <p class="card-text">Price: {{ restaurant.price_level }} | Rating: {{ restaurant.rating }}/5 <a
