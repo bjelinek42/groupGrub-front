@@ -57,8 +57,10 @@ export default {
         <label>Password confirmation:</label>
         <input type="password" v-model="newUserParams.password_confirmation" />
       </div>
+      <p>Select Group</p>
       <select name="groups" id="groups" v-model="newUserParams.group_id">
-        <option v-for="group in groups" v-bind:key="group.id" v-bind:value="group.id">{{ group.name }}</option>
+        <option v-for="group in groups" v-bind:key="group.id" v-bind:value="group.id">{{ group.name }}
+        </option>
       </select>
       <p><input type="submit" value="Submit" /></p>
     </form>

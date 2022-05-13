@@ -48,7 +48,7 @@ export default {
         </div>
       </div>
     </div>
-    <p>{{ this.voteMessage }}</p>
+    <h2>{{ this.voteMessage }}</h2>
   </div>
 </template>
 
