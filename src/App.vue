@@ -15,7 +15,8 @@
             <a class="nav-link active" href="/groups/:id">Group</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/restaurants/search">Search Restaurants</a>
+            <!-- <a class="nav-link active" href="/restaurants/search">Search Restaurants</a> -->
+            <router-link class="nav-link active" to="/restaurants/search">Search Restaurants</router-link>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button"
