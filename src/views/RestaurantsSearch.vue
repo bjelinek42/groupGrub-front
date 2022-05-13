@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-// import { Console } from "console";
 
 export default {
   data: function () {
@@ -53,8 +52,8 @@ export default {
       })
       this.cuisines = this.cuisines.slice(0, -2)
       this.newRestaurantParams.cuisines = this.cuisines
-      axios.post(`/restaurants`, this.newRestaurantParams).then(response => {
-        console.log('in create', response.data)
+      axios.post(`/restaurants.json`, this.newRestaurantParams).then(response => {
+        console.log('in create', response.data.message)
         // this.$router.push("/users")
       })
         .catch((error) => {
@@ -112,11 +111,14 @@ export default {
             if (closeHours === 0) {
               closeHours = 12
             }
-            if (closeHours / 12 > 1 && closeHours / 12 != 2) {
+            if (closeHours / 12 > 1 && closeHours / 12 < 2) {
               closeHours = closeHours - 12;
               var closePM = "pm";
             } else if (closeHours === 12) {
               closePM = "pm";
+            } else if (closeHours / 12 > 2) {
+              closeHours = closeHours - 24
+              closePM = "am"
             } else {
               if (closeHours === 24) {
                 closeHours = 12;
@@ -215,51 +217,6 @@ export default {
         </div>
       </div>
     </div>
-    <!-- <div>
-    <button type="button" class="btn btn-primary" v-on:click="getApi()">GET API</button>
-    <div v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
-      <h1>Location Id: {{ restaurant.location_id }}</h1>
-      <h1>Name: {{ restaurant.name }} </h1>
-      <h1>Type: {{ restaurant.category.name }}, {{ restaurant.subcategory[0].name }}</h1>
-      <h1>Address: {{ restaurant.address }}</h1>
-      <h1>Rating: {{ restaurant.rating }}/5 <a v-bind:href="restaurant.web_url" target="_blank">Reviews</a></h1>
-      <h1>Price: {{ restaurant.price_level }}</h1>
-      <h1 v-if="restaurant.hours">
-        Hours:
-        <div v-for="time in restaurant.hours.week_ranges[0]" v-bind:key="time">
-          Sunday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[1]" v-bind:key="time">
-          Monday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[2]" v-bind:key="time">
-          Tuesday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[3]" v-bind:key="time">
-          Wednesday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[4]" v-bind:key="time">
-          Thursday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[5]" v-bind:key="time">
-          Friday: {{ time }}
-        </div>
-        <div v-for="time in restaurant.hours.week_ranges[6]" v-bind:key="time">
-          Saturday: {{ time }}
-        </div>
-      </h1>
-      <h1>Cuisines:</h1>
-      <div v-for="cuisine in restaurant.cuisine" v-bind:key="cuisine.key">
-        <h2>{{ cuisine.name }}</h2>
-      </div>
-      <h1>Dietary Restrictions: {{ restaurant.dietary_restrictions }}</h1>
-      <h2 v-if="restaurant.reserve_info">Reserve a Table or Order Ahead:<a v-bind:href="restaurant.reserve_info.url"
-          target="_blank"><img v-bind:src="restaurant.reserve_info.provider_img" alt="Click Here"
-            style="width:300px"></a>
-      </h2>
-      <button @click="createRestaurant(restaurant)">Add To Favorites</button>
-    </div>
-  </div> -->
   </div>
 </template>
 

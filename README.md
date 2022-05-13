@@ -1,5 +1,7 @@
 # groupGrub Frontend
 
+This is frontend for the API [groupGrub Backend](https://github.com/bjelinek42/groupGrub-back).
+
 groupGrub is an app that aims to reduce the frustration when groups are trying to decide democratically where they will go out to eat together. Each user is a part of a group, and each user has a profile with favorite restaurants. When a group decides they want to go out to eat, a member can create a new vote which will take all the favorites from each user and find the top three most popular restaurants. These three restaurants will then be voted on by each group member. Following the vote, the winning restaurant will be displayed on the group page. No more awkwardness deciding where to eat!
 
 -Notes for Lyft apprenticeship submission: This is a capstone project for the bootcamp I am currently taking. It is due a week after the application for the apprenticeship closes. It is currently well functioning, but the design leaves something to be desired as I avoided a theme in favor of bootstrap to get more experience with it. 
@@ -28,9 +30,9 @@ Users can navigate to the "Search Restaurants" page on to navbar or the link in 
 The group page shows the group name, members, and most recent restaurant winner. It will also indicate if a vote is currently in progress. The user can generate a vote, but only one at a time. The vote will automatically close when all users have voted.
 
 ### Roadmap
--link to directions sent out when vote concluded
+-link to directions sent out by email to each user in a group when vote concluded
 
--vastly improve design
+-redesign
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

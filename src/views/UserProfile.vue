@@ -66,7 +66,8 @@ export default {
             <p class="card-text">{{ restaurant.cuisines }}</p>
           </div>
           <div class="card-footer">
-            <button @click="deleteRestaurant(restaurant)">Delete from Favorites</button>
+            <button type="button" class="btn btn-danger" @click="deleteRestaurant(restaurant)">Delete from
+              Favorites</button>
           </div>
         </div>
       </div>
