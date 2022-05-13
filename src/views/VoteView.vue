@@ -6,7 +6,9 @@ export default {
       message: "Welcome to Vue.jsx!",
       voteRestaurants: [],
       restaurants: [],
-      voteMessage: ""
+      voteMessage: "",
+      voteEnded: false,
+      group: {}
     };
   },
   created: function () {
@@ -17,16 +19,22 @@ export default {
       axios.get("/vote_restaurants.json").then(response => {
         console.log("getting vote", response.data)
         this.voteRestaurants = response.data
+        this.group = response.data[0].group
+        console.log(this.group)
       })
     },
     declareVote: function (restaurant) {
       console.log(restaurant)
       axios.patch(`/vote_restaurants/${restaurant.id}`).then(response => {
         this.voteMessage = response.data.message
+        this.voteEnded = response.data.all_votes_in
       })
     },
     seeMap: function (restaurant) {
       window.open(`https://maps.google.com/?q=${restaurant.address}`)
+    },
+    groupPage: function () {
+      this.$router.push(`/groups/${this.group.id}`)
     }
   },
 };
@@ -45,6 +53,7 @@ export default {
             <h5 class="card-title">{{ restaurant.restaurant.name }}</h5>
             <p class="card-text">{{ restaurant.restaurant.address }}</p>
             <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
+            <p class="card-text">{{ restaurant.restaurant.cuisines }}</p>
           </div>
           <div class="card-footer">
             <button @click="declareVote(restaurant)">Vote</button>
@@ -53,6 +62,8 @@ export default {
       </div>
     </div>
     <h2>{{ this.voteMessage }}</h2>
+    <div v-if="voteEnded === true"><button type="button" class="btn btn-primary" @click="groupPage()">Go to Group
+        Page</button></div>
   </div>
 </template>
 
