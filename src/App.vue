@@ -13,7 +13,8 @@
             <router-link class="nav-link active" aria-current="page" to="/users">Profile</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="/groups/:id">Group</a>
+            <!-- <a class="nav-link active" href="/groups/:id">Group</a> -->
+            <router-link class="nav-link active" to="/groups/:id">Group</router-link>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link active" href="/restaurants/search">Search Restaurants</a> -->
