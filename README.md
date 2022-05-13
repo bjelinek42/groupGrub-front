@@ -4,13 +4,12 @@ This is frontend for the API [groupGrub Backend](https://github.com/bjelinek42/g
 
 groupGrub is an app that aims to reduce the frustration when groups are trying to decide democratically where they will go out to eat together. Each user is a part of a group, and each user has a profile with favorite restaurants. When a group decides they want to go out to eat, a member can create a new vote which will take all the favorites from each user and find the top three most popular restaurants. These three restaurants will then be voted on by each group member. Following the vote, the winning restaurant will be displayed on the group page. No more awkwardness deciding where to eat!
 
--Notes for Lyft apprenticeship submission: This is a capstone project for the bootcamp I am currently taking. It is due a week after the application for the apprenticeship closes. It is currently well functioning, but the design leaves something to be desired as I avoided a theme in favor of bootstrap to get more experience with it. 
-
 ## Installation
 
 Clone and install
 
 ```bash
+git clone https://github.com/bjelinek42/groupGrub-front.git
 npm install
 ```
 and run the server

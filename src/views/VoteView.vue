@@ -3,12 +3,12 @@ import axios from 'axios'
 export default {
   data: function () {
     return {
-      message: "Welcome to Vue.jsx!",
       voteRestaurants: [],
       restaurants: [],
       voteMessage: "",
       voteEnded: false,
-      group: {}
+      group: {},
+      currentVote: true
     };
   },
   created: function () {
@@ -19,7 +19,9 @@ export default {
       axios.get("/vote_restaurants.json").then(response => {
         console.log("getting vote", response.data)
         this.voteRestaurants = response.data
-        this.group = response.data[0].group
+        if (response.data[0]) {
+          this.group = response.data[0].group
+        }
         console.log(this.group)
       })
     },
