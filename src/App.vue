@@ -9,7 +9,8 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/users">Profile</a>
+            <!-- <a class="nav-link active" aria-current="page" href="/users">Profile</a> -->
+            <router-link class="nav-link active" aria-current="page" to="/users">Profile</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="/groups/:id">Group</a>
@@ -24,12 +25,18 @@
               Authentication
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/login">Login</a></li>
-              <li><a class="dropdown-item" href="/Logout">Logout</a></li>
+              <li>
+                <router-link class="dropdown-item" to="/login">Login</router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item" to="/Logout">Logout</router-link>
+              </li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="/signup">SignUp</a></li>
+              <li>
+                <router-link class="dropdown-item" to="/signup">SignUp</router-link>
+              </li>
             </ul>
           </li>
         </ul>
