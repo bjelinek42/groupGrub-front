@@ -24,6 +24,9 @@ export default {
       axios.patch(`/vote_restaurants/${restaurant.id}`).then(response => {
         this.voteMessage = response.data.message
       })
+    },
+    seeMap: function (restaurant) {
+      window.open(`https://maps.google.com/?q=${restaurant.address}`)
     }
   },
 };
@@ -41,6 +44,7 @@ export default {
           <div class="card-body">
             <h5 class="card-title">{{ restaurant.restaurant.name }}</h5>
             <p class="card-text">{{ restaurant.restaurant.address }}</p>
+            <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
           </div>
           <div class="card-footer">
             <button @click="declareVote(restaurant)">Vote</button>

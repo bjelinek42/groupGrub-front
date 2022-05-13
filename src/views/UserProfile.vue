@@ -38,6 +38,9 @@ export default {
     },
     goToCurrentVote: function () {
       this.$router.push("/vote_restaurants")
+    },
+    seeMap: function (restaurant) {
+      window.open(`https://maps.google.com/?q=${restaurant.address}`)
     }
   },
 };
@@ -59,6 +62,7 @@ export default {
           <div class="card-body">
             <h5 class="card-title">{{ restaurant.name }}</h5>
             <p class="card-text">{{ restaurant.address }}</p>
+            <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
             <p class="card-text">{{ restaurant.cuisines }}</p>
           </div>
           <div class="card-footer">

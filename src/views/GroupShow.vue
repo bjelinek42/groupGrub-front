@@ -34,6 +34,9 @@ export default {
     },
     goToVotePage: function () {
       this.$router.push("/vote_restaurants")
+    },
+    seeMap: function (winner) {
+      window.open(`https://maps.google.com/?q=${winner.address}`)
     }
   },
 };
@@ -64,6 +67,7 @@ export default {
             <div class="card-body">
               <h5 class="card-title">{{ winner.name }}</h5>
               <p class="card-text">{{ winner.address }}</p>
+              <p><button type="button" class="btn btn-primary" @click="seeMap(winner)">Map</button></p>
               <p class="card-text">{{ winner.cuisines }}</p>
             </div>
           </div>
