@@ -45,8 +45,11 @@ export default {
       this.newRestaurantParams.name = restaurant.name
       this.newRestaurantParams.address = restaurant.address
       this.newRestaurantParams.image = restaurant.photo.images.small.url
+      this.cuisines = ""
       restaurant.cuisine.forEach(cuisine => {
+        console.log(cuisine)
         this.cuisines = this.cuisines + cuisine.name + ', '
+        console.log(this.cuisines)
       })
       this.cuisines = this.cuisines.slice(0, -2)
       this.newRestaurantParams.cuisines = this.cuisines
