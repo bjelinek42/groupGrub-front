@@ -32,7 +32,7 @@ const routes = [
     component: LogOut
   },
   {
-    path: '/users',
+    path: '/users/:id',
     name: 'profile',
     component: UserProfile
   },

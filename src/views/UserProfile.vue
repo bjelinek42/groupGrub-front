@@ -3,11 +3,11 @@ import axios from 'axios'
 export default {
   data: function () {
     return {
-      message: "Your Profile",
       restaurants: [],
       user: {},
       group: {},
-      deleteSuccessful: ""
+      deleteSuccessful: "",
+      errors: []
     };
   },
   created: function () {
@@ -21,6 +21,10 @@ export default {
         this.user = response.data.user
         this.group = response.data.group
       })
+        .catch((error) => {
+          console.log("Show Profile Error", error.response);
+          this.errors = error.response.data.errors;
+        });
     },
     groupPage: function () {
       this.$router.push(`/groups/${this.group.id}`)
@@ -48,7 +52,10 @@ export default {
 
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
+    <ul>
+      <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+    </ul>
+    <h1>Your Profile</h1>
     <h2>Username: {{ this.user.name }}</h2>
     <h2>Group: {{ this.group.name }} <button type="button" class="btn btn-primary" @click="groupPage()">View Group
         Page</button></h2>
