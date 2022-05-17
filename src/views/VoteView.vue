@@ -36,7 +36,7 @@ export default {
       window.open(`https://maps.google.com/?q=${restaurant.address}`)
     },
     groupPage: function () {
-      this.$router.push(`/groups/${this.group.id}`)
+      this.$router.push(`/users/group`)
     }
   },
 };

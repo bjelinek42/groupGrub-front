@@ -1,3 +1,16 @@
+<script>
+export default {
+  data: function () {
+    return {
+      message: "Welcome to Vue.js!",
+      userId: localStorage.getItem('userId')
+    };
+  },
+  created: function () { },
+  methods: {},
+};
+</script>
+
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -10,11 +23,12 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <!-- <a class="nav-link active" aria-current="page" href="/users">Profile</a> -->
-            <router-link class="nav-link active" aria-current="page" to="/users">Profile</router-link>
+            <router-link class="nav-link active" aria-current="page" v-bind:to="`/users/${userId}`">Profile
+            </router-link>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link active" href="/groups/:id">Group</a> -->
-            <router-link class="nav-link active" to="/groups/:id">Group</router-link>
+            <router-link class="nav-link active" to="/users/group">Group</router-link>
           </li>
           <li class="nav-item">
             <!-- <a class="nav-link active" href="/restaurants/search">Search Restaurants</a> -->

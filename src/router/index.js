@@ -32,14 +32,14 @@ const routes = [
     component: LogOut
   },
   {
+    path: '/users/group',
+    name: 'groups',
+    component: GroupShow
+  },
+  {
     path: '/users/:id',
     name: 'profile',
     component: UserProfile
-  },
-  {
-    path: '/groups/:id',
-    name: 'groups',
-    component: GroupShow
   },
   {
     path: '/restaurants/search',

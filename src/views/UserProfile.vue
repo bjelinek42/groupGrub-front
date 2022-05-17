@@ -15,7 +15,8 @@ export default {
   },
   methods: {
     showProfile: function () {
-      axios.get(`/users/:id`).then(response => {
+      var userId = localStorage.getItem(userId)
+      axios.get(`/users/${userId}`).then(response => {
         console.log('showing profile', response.data)
         this.restaurants = response.data.restaurants
         this.user = response.data.user
@@ -27,7 +28,7 @@ export default {
         });
     },
     groupPage: function () {
-      this.$router.push(`/groups/${this.group.id}`)
+      this.$router.push(`/users/group`)
     },
     addRestaurant: function () {
       this.$router.push("/restaurants/search")

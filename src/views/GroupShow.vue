@@ -7,7 +7,7 @@ export default {
       winner: {},
       group: {},
       users: {},
-      allVotes: ""
+      allVotes: true
     };
   },
   created: function () {
@@ -15,7 +15,7 @@ export default {
   },
   methods: {
     showGroup: function () {
-      axios.get(`/groups/1.json`).then(response => {
+      axios.get(`/users/group.json`).then(response => {
         console.log('showing group', response.data)
         if (response.data.winning_restaurant) {
           this.winner = response.data.winning_restaurant

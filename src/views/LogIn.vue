@@ -15,7 +15,7 @@ export default {
         .then((response) => {
           axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
-          localStorage.setItem("user_id", response.data.user_id)
+          localStorage.setItem("userId", response.data.user_id)
           var user_id = response.data.user_id
           console.log(response.data)
           this.$router.push(`/users/${user_id}`);
