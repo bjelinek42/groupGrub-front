@@ -22,16 +22,13 @@ export default {
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <!-- <a class="nav-link active" aria-current="page" href="/users">Profile</a> -->
             <router-link class="nav-link active" aria-current="page" v-bind:to="`/users/${userId}`">Profile
             </router-link>
           </li>
           <li class="nav-item">
-            <!-- <a class="nav-link active" href="/groups/:id">Group</a> -->
             <router-link class="nav-link active" to="/users/group">Group</router-link>
           </li>
           <li class="nav-item">
-            <!-- <a class="nav-link active" href="/restaurants/search">Search Restaurants</a> -->
             <router-link class="nav-link active" to="/restaurants/search">Search Restaurants</router-link>
           </li>
           <li class="nav-item dropdown">
