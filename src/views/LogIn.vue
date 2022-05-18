@@ -17,7 +17,6 @@ export default {
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("userId", response.data.user_id)
           var user_id = response.data.user_id
-          console.log(response.data)
           this.$router.push(`/users/${user_id}`);
         })
         .catch((error) => {
@@ -38,11 +37,11 @@ export default {
       <ul>
         <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
       </ul>
-      <div>
+      <div class="pad">
         <label>Email:</label>
         <input type="email" v-model="newSessionParams.email" />
       </div>
-      <div>
+      <div class="pad">
         <label>Password:</label>
         <input type="password" v-model="newSessionParams.password" />
       </div>
@@ -54,5 +53,9 @@ export default {
 <style>
 .margin {
   margin: 15px;
+}
+
+.pad {
+  margin: 10px;
 }
 </style>

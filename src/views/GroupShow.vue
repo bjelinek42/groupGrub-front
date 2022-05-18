@@ -23,7 +23,6 @@ export default {
         this.group = response.data.group
         this.users = response.data.users
         this.allVotes = response.data.all_votes
-        console.log(this.winner, this.group, this.users, this.allVotes)
       })
     },
     generateVote: function () {
@@ -44,20 +43,22 @@ export default {
 
 <template>
   <div class="home">
-    <h1>Your Group</h1>
-    <object width="20">
+    <h1 class="pad">Your Group</h1>
+    <object class="pad" width="20">
       <ul class="list-group">
         <li class="list-group-item"><b>{{ group.name }} Group Members</b></li>
         <li class="list-group-item" v-for="user in users" v-bind:key="user">{{ user.name }}</li>
       </ul>
     </object>
-    <h3 v-if="this.allVotes === true">Most recent vote has concluded<p><button type="button" class="btn btn-warning"
-          @click="generateVote()">Start New
-          Vote</button></p>
-    </h3>
-    <div v-else>Voting currently in progress
-      <p><button type="button" class="btn btn-warning" @click="goToVotePage()">Go To Vote</button></p>
-    </div>
+    <object class="pad">
+      <h2 v-if="this.allVotes === true">Most recent vote has concluded<p><button type="button" class="btn btn-warning"
+            @click="generateVote()">Start New
+            Vote</button></p>
+      </h2>
+      <h2 v-else>Voting currently in progress
+        <p><button type="button" class="btn btn-warning" @click="goToVotePage()">Go To Vote</button></p>
+      </h2>
+    </object>
     <h2>Current Winner</h2>
     <div v-if="this.winner.name">
       <div class="row row-cols-1 row-cols-md-3">
@@ -87,5 +88,9 @@ export default {
 
 .home {
   margin: 20px;
+}
+
+.pad {
+  margin: 10px;
 }
 </style>

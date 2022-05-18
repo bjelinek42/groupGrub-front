@@ -7,7 +7,7 @@ export default {
       user: {},
       group: {},
       deleteSuccessful: "",
-      errors: []
+      errors: [],
     };
   },
   created: function () {
@@ -19,6 +19,7 @@ export default {
       axios.get(`/users/${userId}`).then(response => {
         console.log('showing profile', response.data)
         this.restaurants = response.data.restaurants
+        console.log(this.restaurants)
         this.user = response.data.user
         this.group = response.data.group
       })
@@ -58,13 +59,13 @@ export default {
     </ul>
     <h1>Your Profile</h1>
     <h2>Username: {{ this.user.name }}</h2>
-    <h2>Group: {{ this.group.name }} <button type="button" class="btn btn-primary" @click="groupPage()">View Group
+    <h2>Group: {{ this.group.name }} <button type="button" class="pad btn btn-primary" @click="groupPage()">View Group
         Page</button></h2>
     <!-- <button @click="goToCurrentVote()">Go to current vote</button> -->
     <h3 color="red">{{ this.deleteSuccessful }}</h3>
-    <button type="button" class="btn btn-warning" @click="addRestaurant()">Add Restaurant to Favorites</button>
-    <h2>My Favorite Restaurants</h2>
-    <div class="row row-cols-1 row-cols-md-5 g-4">
+    <button type="button" class="pad btn btn-warning" @click="addRestaurant()">Add Restaurant to Favorites</button>
+    <h2 class="pad">My Favorite Restaurants</h2>
+    <div class=" pad row row-cols-1 row-cols-md-5 g-4">
       <div class="col mx-auto" v-for="restaurant in restaurants" v-bind:key="restaurant.location_id">
         <div class="card h-100">
           <img class="card-img-top" v-if="restaurant.image"><img v-bind:src="restaurant.image">
@@ -87,5 +88,9 @@ export default {
 <style>
 .home {
   margin: 20px;
+}
+
+.pad {
+  margin: 10px;
 }
 </style>

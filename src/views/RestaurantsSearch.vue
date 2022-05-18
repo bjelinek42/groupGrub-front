@@ -47,9 +47,7 @@ export default {
       this.newRestaurantParams.image = restaurant.photo.images.small.url
       this.cuisines = ""
       restaurant.cuisine.forEach(cuisine => {
-        console.log(cuisine)
         this.cuisines = this.cuisines + cuisine.name + ', '
-        console.log(this.cuisines)
       })
       this.cuisines = this.cuisines.slice(0, -2)
       this.newRestaurantParams.cuisines = this.cuisines
@@ -143,7 +141,7 @@ export default {
 
 <template>
   <div class="margin">
-    <p>Enter city you would like to seach: <input type="text" v-model="currentCity.currentCity"><button
+    <p>Enter city you would like to seach: <input type="text" v-model="currentCity.currentCity"><button class="margin"
         @click="findCity()">Search Cities</button> </p>
     <p>{{ selectCities }}</p>
     <p v-for="city in cities" v-bind:key="city.location_id">

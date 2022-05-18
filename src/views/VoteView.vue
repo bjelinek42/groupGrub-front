@@ -73,4 +73,7 @@ export default {
 .home {
   margin: 20px;
 }
+.pad {
+  margin: 10px;
+}
 </style>

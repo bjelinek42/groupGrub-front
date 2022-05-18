@@ -43,26 +43,27 @@ export default {
       </ul>
       <div>
         <label>Name:</label>
-        <input type="text" v-model="newUserParams.name" />
+        <input class="pad" type="text" v-model="newUserParams.name" />
       </div>
       <div>
         <label>Email:</label>
-        <input type="email" v-model="newUserParams.email" />
+        <input class="pad" type="email" v-model="newUserParams.email" />
       </div>
       <div>
         <label>Password:</label>
-        <input type="password" v-model="newUserParams.password" />
+        <input class="pad" type="password" v-model="newUserParams.password" />
       </div>
       <div>
         <label>Password confirmation:</label>
-        <input type="password" v-model="newUserParams.password_confirmation" />
+        <input class="pad" type="password" v-model="newUserParams.password_confirmation" />
       </div>
-      <p>Select Group</p>
-      <select name="groups" id="groups" v-model="newUserParams.group_id">
-        <option v-for="group in groups" v-bind:key="group.id" v-bind:value="group.id">{{ group.name }}
-        </option>
-      </select>
-      <p><input type="submit" value="Submit" /></p>
+      <p>Select Group
+        <select name="groups" id="groups" v-model="newUserParams.group_id">
+          <option class="pad" v-for="group in groups" v-bind:key="group.id" v-bind:value="group.id">{{ group.name }}
+          </option>
+        </select>
+      </p>
+      <p><input class="pad btn btn-primary" type="submit" value="Submit" /></p>
     </form>
   </div>
 </template>
@@ -70,5 +71,9 @@ export default {
 <style>
 .signup {
   margin: 15px;
+}
+
+.pad {
+  margin: 10px;
 }
 </style>
