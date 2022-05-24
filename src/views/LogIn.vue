@@ -47,6 +47,11 @@ export default {
       </div>
       <input type="submit" value="Submit" />
     </form>
+    <h3>Test Account Names:</h3>
+    <h2>jimmy@email.com</h2>
+    <h2>zac@email.com</h2>
+    <h2>drew@email.com</h2>
+    <h2>All Passwords: password</h2>
   </div>
 </template>
 
