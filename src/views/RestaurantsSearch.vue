@@ -84,53 +84,44 @@ export default {
           dailyHours.push(open);
         } else {
           hours.forEach(time => {
-            var openHours = Math.floor((time.open_time) / 60);
-            if (openHours / 12 > 1 && openHours / 12 != 2) {
-              openHours = openHours - 12;
-              var openPM = "pm";
-            } else if (openHours === 12) {
-              openPM = "pm";
-            } else {
-              if (openHours === 24 || openHours === 0) {
-                openHours = 12;
-              }
-              openPM = "am";
-            }
-            var openMinutes = Math.floor(time.open_time % 60);
-            if (openMinutes === 0) {
-              openMinutes = `00`;
-            }
-            var closeHours = Math.floor(time.close_time / 60);
-            if (closeHours === 0) {
-              closeHours = 12
-            }
-            if (closeHours / 12 > 1 && closeHours / 12 < 2) {
-              closeHours = closeHours - 12;
-              var closePM = "pm";
-            } else if (closeHours === 12) {
-              closePM = "pm";
-            } else if (closeHours / 12 > 2) {
-              closeHours = closeHours - 24
-              closePM = "am"
-            } else {
-              if (closeHours === 24) {
-                closeHours = 12;
-              }
-              closePM = "am";
-            }
-            var closeMinutes = Math.floor(time.close_time % 60);
-            if (closeMinutes === 0) {
-              closeMinutes = `00`;
-            }
-            var open = `${openHours}:${openMinutes} ${openPM} - ${closeHours}:${closeMinutes} ${closePM}`;
+            var openTime = time.open_time;
+            var openHours = convertHours(openTime);
+            var openMinutes = convertMinutes(openTime);
+            var closeTime = time.close_time;
+            var closeHours = convertHours(closeTime);
+            var closeMinutes = convertMinutes(closeTime);
+            var open = `${openHours.hours}:${openMinutes} ${openHours.meridiam} - ${closeHours.hours}:${closeMinutes} ${closeHours.meridiam}`;
             dailyHours.push(open);
           });
         }
         weeklyHours.push(dailyHours);
       });
-      // console.log(weeklyHours);
-      this.weeklyHoursDone = weeklyHours
-      return weeklyHours
+
+      this.weeklyHoursDone = weeklyHours;
+      console.log(weeklyHours);
+
+      function convertMinutes(time) {
+        var minutes = Math.floor(time % 60);
+        if (minutes === 0) {
+          minutes = `00`;
+        }
+        return minutes;
+      }
+      function convertHours(time) {
+        var hours = Math.floor((time) / 60);
+        if (hours / 12 > 1 && hours / 12 !== 2) {
+          hours = hours - 12;
+          var meridiam = "pm";
+        } else if (hours === 12) {
+          meridiam = "pm";
+        } else {
+          if (hours === 24 || hours === 0) {
+            hours = 12;
+          }
+          meridiam = "am";
+        }
+        return { "hours": hours, "meridiam": meridiam };
+      }
     },
     seeMap: function (restaurant) {
       window.open(`https://maps.google.com/?q=${restaurant.address}`)
@@ -170,31 +161,31 @@ export default {
                 </div>
                 <div class="col" v-if="restaurant.hours">
                   Sunday:
-                  <div v-for="time in restaurant.hours.week_ranges[0]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[0]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Monday:
-                  <div v-for="time in restaurant.hours.week_ranges[1]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[1]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Tuesday:
-                  <div v-for="time in restaurant.hours.week_ranges[2]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[2]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Wednesday:
-                  <div v-for="time in restaurant.hours.week_ranges[3]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[3]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Thursday:
-                  <div v-for="time in restaurant.hours.week_ranges[4]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[4]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Friday:
-                  <div v-for="time in restaurant.hours.week_ranges[5]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[5]" v-bind:key="time">
                     {{ time }}
                   </div>
                   Saturday:
-                  <div v-for="time in restaurant.hours.week_ranges[6]" v-bind:key="time">
+                  <div v-for="time in weeklyHoursDone[6]" v-bind:key="time">
                     {{ time }}
                   </div>
                 </div>
