@@ -10,24 +10,24 @@ export default {
       currentCity: {},
       cities: [],
       chosenCity: {},
-      cuisines: "",
+      cuisines: [],
       selectCities: "",
       searchByName: false
     };
   },
-  watch: {
-    restaurants() {
-      this.restaurants.forEach(restaurant => {
-        if (restaurant.hours) {
-          restaurant.hours.week_ranges = this.convertHours(restaurant)
-          this.searchByName = true
-        }
-      })
-    },
-    cities() {
-      this.selectCities = "Please select your city from the following:"
-    },
-  },
+  // watch: {
+  //   restaurants() {
+  //     this.restaurants.forEach(restaurant => {
+  //       if (restaurant.hours) {
+  //         restaurant.hours.week_ranges = this.convertHours(restaurant)
+  //         this.searchByName = true
+  //       }
+  //     })
+  //   },
+  //   cities() {
+  //     this.selectCities = "Please select your city from the following:"
+  //   },
+  // },
   created: function () {
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
       console.log("city", city)
       axios.get(`/restaurants/search?chosenCity=${city.location_id}`).then((response) => {
         this.restaurants = response.data;
-        console.log("retrieving restaurants");
+        console.log("retrieving restaurants", this.restaurants);
       });
     },
     createRestaurant: function (restaurant) {
@@ -43,12 +43,25 @@ export default {
       this.newRestaurantParams.name = restaurant.name
       this.newRestaurantParams.address = restaurant.address
       this.newRestaurantParams.image = restaurant.photo.images.small.url
-      this.cuisines = ""
+      if (restaurant.reserve_info) {
+        this.newRestaurantParams.reservations = restaurant.reserve_info.url
+      } else {
+        this.newRestaurantParams.reservations = restaurant.phone
+      }
+      this.newRestaurantParams.phone_number = restaurant.phone
+      this.newRestaurantParams.price = restaurant.price_level
+      this.newRestaurantParams.rating = restaurant.rating
+      this.newRestaurantParams.reviews = restaurant.web_url
+      console.log(restaurant)
       restaurant.cuisine.forEach(cuisine => {
-        this.cuisines = this.cuisines + cuisine.name + ', '
+        this.cuisines.push(cuisine.name)
       })
-      this.cuisines = this.cuisines.slice(0, -2)
       this.newRestaurantParams.cuisines = this.cuisines
+      if (restaurant.hours) {
+        this.newRestaurantParams.schedule = restaurant.hours.week_ranges
+      } else {
+        this.newRestaurantParams.schedule = ["Unavailable"]
+      }
       axios.post(`/restaurants.json`, this.newRestaurantParams).then(response => {
         console.log('in create', response.data.message)
       })
@@ -56,6 +69,7 @@ export default {
           console.log("restaurant create error", error.response);
           this.errors = error.response.data.errors;
         })
+      this.cuisines = []
     },
     findCity: function () {
       console.log(this.currentCity)
@@ -71,64 +85,64 @@ export default {
         return lowerName.includes(lowerSearchTerm)
       })
     },
-    convertHours: function (restaurant) {
-      var schedule = restaurant.hours.week_ranges
-      var weeklyHours = [];
-      schedule.forEach(hours => {
-        var dailyHours = [];
-        if (hours.length === 0) {
-          var open = "Closed";
-          dailyHours.push(open);
-        } else {
-          hours.forEach(time => {
-            var openHours = Math.floor((time.open_time) / 60);
-            if (openHours / 12 > 1 && openHours / 12 != 2) {
-              openHours = openHours - 12;
-              var openPM = "pm";
-            } else if (openHours === 12) {
-              openPM = "pm";
-            } else {
-              if (openHours === 24 || openHours === 0) {
-                openHours = 12;
-              }
-              openPM = "am";
-            }
-            var openMinutes = Math.floor(time.open_time % 60);
-            if (openMinutes === 0) {
-              openMinutes = `00`;
-            }
-            var closeHours = Math.floor(time.close_time / 60);
-            if (closeHours === 0) {
-              closeHours = 12
-            }
-            if (closeHours / 12 > 1 && closeHours / 12 < 2) {
-              closeHours = closeHours - 12;
-              var closePM = "pm";
-            } else if (closeHours === 12) {
-              closePM = "pm";
-            } else if (closeHours / 12 > 2) {
-              closeHours = closeHours - 24
-              closePM = "am"
-            } else {
-              if (closeHours === 24) {
-                closeHours = 12;
-              }
-              closePM = "am";
-            }
-            var closeMinutes = Math.floor(time.close_time % 60);
-            if (closeMinutes === 0) {
-              closeMinutes = `00`;
-            }
-            var open = `${openHours}:${openMinutes} ${openPM} - ${closeHours}:${closeMinutes} ${closePM}`;
-            dailyHours.push(open);
-          });
-        }
-        weeklyHours.push(dailyHours);
-      });
-      // console.log(weeklyHours);
-      this.weeklyHoursDone = weeklyHours
-      return weeklyHours
-    },
+    // convertHours: function (restaurant) {
+    //   var schedule = restaurant.hours.week_ranges
+    //   var weeklyHours = [];
+    //   schedule.forEach(hours => {
+    //     var dailyHours = [];
+    //     if (hours.length === 0) {
+    //       var open = "Closed";
+    //       dailyHours.push(open);
+    //     } else {
+    //       hours.forEach(time => {
+    //         var openHours = Math.floor((time.open_time) / 60);
+    //         if (openHours / 12 > 1 && openHours / 12 != 2) {
+    //           openHours = openHours - 12;
+    //           var openPM = "pm";
+    //         } else if (openHours === 12) {
+    //           openPM = "pm";
+    //         } else {
+    //           if (openHours === 24 || openHours === 0) {
+    //             openHours = 12;
+    //           }
+    //           openPM = "am";
+    //         }
+    //         var openMinutes = Math.floor(time.open_time % 60);
+    //         if (openMinutes === 0) {
+    //           openMinutes = `00`;
+    //         }
+    //         var closeHours = Math.floor(time.close_time / 60);
+    //         if (closeHours === 0) {
+    //           closeHours = 12
+    //         }
+    //         if (closeHours / 12 > 1 && closeHours / 12 < 2) {
+    //           closeHours = closeHours - 12;
+    //           var closePM = "pm";
+    //         } else if (closeHours === 12) {
+    //           closePM = "pm";
+    //         } else if (closeHours / 12 > 2) {
+    //           closeHours = closeHours - 24
+    //           closePM = "am"
+    //         } else {
+    //           if (closeHours === 24) {
+    //             closeHours = 12;
+    //           }
+    //           closePM = "am";
+    //         }
+    //         var closeMinutes = Math.floor(time.close_time % 60);
+    //         if (closeMinutes === 0) {
+    //           closeMinutes = `00`;
+    //         }
+    //         var open = `${openHours}:${openMinutes} ${openPM} - ${closeHours}:${closeMinutes} ${closePM}`;
+    //         dailyHours.push(open);
+    //       });
+    //     }
+    //     weeklyHours.push(dailyHours);
+    //   });
+    //   // console.log(weeklyHours);
+    //   this.weeklyHoursDone = weeklyHours
+    //   return weeklyHours
+    // },
     seeMap: function (restaurant) {
       window.open(`https://maps.google.com/?q=${restaurant.address}`)
     }
@@ -168,31 +182,52 @@ export default {
                 <div class="col" v-if="restaurant.hours">
                   Sunday:
                   <div v-for="time in restaurant.hours.week_ranges[0]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Monday:
                   <div v-for="time in restaurant.hours.week_ranges[1]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Tuesday:
                   <div v-for="time in restaurant.hours.week_ranges[2]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Wednesday:
                   <div v-for="time in restaurant.hours.week_ranges[3]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Thursday:
                   <div v-for="time in restaurant.hours.week_ranges[4]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Friday:
                   <div v-for="time in restaurant.hours.week_ranges[5]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                   Saturday:
                   <div v-for="time in restaurant.hours.week_ranges[6]" v-bind:key="time">
-                    {{ time }}
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
                   </div>
                 </div>
               </div>

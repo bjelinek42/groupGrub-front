@@ -25,7 +25,7 @@ export default {
       })
         .catch((error) => {
           console.log("Show Profile Error", error.response);
-          this.errors = error.response.data.errors;
+          this.errors = error.response;
         });
     },
     groupPage: function () {
@@ -54,8 +54,8 @@ export default {
 
 <template>
   <div class="home">
-    <ul>
-      <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+    <ul v-if="errors.length > 0">
+      <li style="color:red">{{ errors.statusText }}: {{ errors.data.message }}</li>
     </ul>
     <h1>Your Profile</h1>
     <h2>Username: {{ this.user.name }}</h2>
@@ -73,7 +73,65 @@ export default {
             <h5 class="card-title">{{ restaurant.name }}</h5>
             <p class="card-text">{{ restaurant.address }}</p>
             <p><button type="button" class="btn btn-primary" @click="seeMap(restaurant)">Map</button></p>
-            <p class="card-text">{{ restaurant.cuisines }}</p>
+            <div class="container">
+              <div class="row align-items-start">
+                <div class="col">
+                  <u>Cuisines</u>
+                  <p class="card-text">{{ restaurant.cuisines }}</p>
+                </div>
+                <div class="col" v-if="restaurant.schedule">
+                  Sunday:
+                  <div v-for="time in restaurant.schedule[0]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Monday:
+                  <div v-for="time in restaurant.schedule[1]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Tuesday:
+                  <div v-for="time in restaurant.schedule[2]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Wednesday:
+                  <div v-for="time in restaurant.schedule[3]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Thursday:
+                  <div v-for="time in restaurant.schedule[4]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Friday:
+                  <div v-for="time in restaurant.schedule[5]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                  Saturday:
+                  <div v-for="time in restaurant.schedule[6]" v-bind:key="time">
+                    <div v-if="time.open_time">
+                      {{ time["open_time"] }} - {{ time["close_time"] }}
+                    </div>
+                    <div v-else>Closed</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="card-footer">
             <button type="button" class="btn btn-danger" @click="deleteRestaurant(restaurant)">Delete from
